@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { getToken } from '@/lib/auth-utils';
 
-export default function TaskForm({ userId, onSubmitCallback }: { userId: number, onSubmitCallback?: () => void }) {
+export default function TaskForm({ userId, onSubmitCallback }: { userId: string, onSubmitCallback?: () => void }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);

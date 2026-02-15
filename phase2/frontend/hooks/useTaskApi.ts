@@ -3,7 +3,7 @@ import { getToken } from '@/lib/auth-utils';
 
 interface Task {
   id: number;
-  user_id: number;
+  user_id: string; // Changed from number to string to match backend UUID
   title: string;
   description: string;
   completed: boolean;
@@ -14,11 +14,11 @@ interface Task {
 interface TaskApiResult {
   loading: boolean;
   error: string | null;
-  createTask: (userId: number, taskData: { title: string; description: string }) => Promise<Task | null>;
-  fetchTasks: (userId: number) => Promise<Task[] | null>;
-  updateTask: (userId: number, taskId: number, taskData: Partial<{ title: string; description: string; completed: boolean }>) => Promise<Task | null>;
-  deleteTask: (userId: number, taskId: number) => Promise<boolean>;
-  toggleTaskCompletion: (userId: number, taskId: number, completed: boolean) => Promise<Task | null>;
+  createTask: (userId: string, taskData: { title: string; description: string }) => Promise<Task | null>;
+  fetchTasks: (userId: string) => Promise<Task[] | null>;
+  updateTask: (userId: string, taskId: number, taskData: Partial<{ title: string; description: string; completed: boolean }>) => Promise<Task | null>;
+  deleteTask: (userId: string, taskId: number) => Promise<boolean>;
+  toggleTaskCompletion: (userId: string, taskId: number, completed: boolean) => Promise<Task | null>;
 }
 
 export const useTaskApi = (): TaskApiResult => {
@@ -76,7 +76,7 @@ export const useTaskApi = (): TaskApiResult => {
   };
 
   const createTask = async (
-    userId: number,
+    userId: string,
     taskData: { title: string; description: string }
   ): Promise<Task | null> => {
     return executeRequest<Task>(`/api/${userId}/tasks`, {
@@ -89,12 +89,12 @@ export const useTaskApi = (): TaskApiResult => {
     });
   };
 
-  const fetchTasks = async (userId: number): Promise<Task[] | null> => {
+  const fetchTasks = async (userId: string): Promise<Task[] | null> => {
     return executeRequest<Task[]>(`/api/${userId}/tasks`);
   };
 
   const updateTask = async (
-    userId: number,
+    userId: string,
     taskId: number,
     taskData: Partial<{ title: string; description: string; completed: boolean }>
   ): Promise<Task | null> => {
@@ -104,7 +104,7 @@ export const useTaskApi = (): TaskApiResult => {
     });
   };
 
-  const deleteTask = async (userId: number, taskId: number): Promise<boolean> => {
+  const deleteTask = async (userId: string, taskId: number): Promise<boolean> => {
     const result = await executeRequest(`/api/${userId}/tasks/${taskId}`, {
       method: 'DELETE'
     });
@@ -112,7 +112,7 @@ export const useTaskApi = (): TaskApiResult => {
   };
 
   const toggleTaskCompletion = async (
-    userId: number,
+    userId: string,
     taskId: number,
     completed: boolean
   ): Promise<Task | null> => {

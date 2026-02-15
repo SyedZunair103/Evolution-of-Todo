@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { getToken } from '@/lib/auth-utils';
 
 interface TaskStatsProps {
-  userId: number;
+  userId: string;
 }
 
 interface Stats {

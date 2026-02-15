@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { getToken } from '@/lib/auth-utils';
 
-export default function TaskList({ userId }: { userId: number }) {
+export default function TaskList({ userId }: { userId: string }) {
   const [tasks, setTasks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const BACKEND_API_BASE = process.env.NEXT_PUBLIC_BACKEND_API_URL || 'http://127.0.0.1:8000';

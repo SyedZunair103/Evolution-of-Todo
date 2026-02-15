@@ -27,7 +27,7 @@ export default function SignupPage() {
 
     try {
       const BACKEND_API_BASE = process.env.NEXT_PUBLIC_BACKEND_API_URL || 'http://127.0.0.1:8000';
-      const response = await fetch(`${BACKEND_API_BASE}/api/auth/register`, {
+      const response = await fetch(`${BACKEND_API_BASE}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
